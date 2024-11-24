@@ -1,5 +1,5 @@
-:bangbang: All work should be done in /workdir/XX/
-# 1. Set up env
+# :bangbang: All work should be done in ```/workdir/XX/```:bangbang:
+## 1. Set up env
 #### 1-1. Download [env_biobakery_pip.yml](https://github.com/parkjooyoung99/Poole-server---Biobakery_workflow/blob/main/env_biobakery_pip.yml) file
 #### 1-2. Create conda env in server
 ```
@@ -13,7 +13,7 @@ mkdir /workdir/jp2626/biobakery_workflow_databases
 biobakery_workflows_databases --install wmgx --location  /workdir/jp2626/biobakery_workflow_databases
 export BIOBAKERY_WORKFLOWS_DATABASES=/workdir/jp2626/biobakery_workflow_databases
 ```
-# 2. Run your data
+## 2. Run your data
 :heavy_exclamation_mark: This is for wgmx. If your data isn't wgmx check [biobakery_workflow github](https://github.com/biobakery/biobakery_workflows)
 
 #### 2-1. Rename your fastq.gz ####
