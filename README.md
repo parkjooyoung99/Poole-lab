@@ -1,1 +1,4 @@
-# Running Biobakery_workflow in Poole server
+# 1. Set up env
+## 1-1. Download yml file
+
+
