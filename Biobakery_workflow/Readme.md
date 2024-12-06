@@ -1,6 +1,6 @@
 # :bangbang: All work should be done in ```/workdir/XX/```:bangbang:
 ## 1. Set up env
-#### 1-1. Download [env_biobakery_pip.yml]([Biobakery_workflow/env_biobakery_pip.yml](https://github.com/parkjooyoung99/Poole-lab/blob/33dfbbb9f957c28d6942f76c3527b276a539b8b5/Biobakery_workflow/env_biobakery_pip.yml)) file
+#### 1-1. Download [env_biobakery_pip.yml](https://github.com/parkjooyoung99/Poole-lab/blob/main/Biobakery_workflow/env_biobakery_pip.yml) file
 #### 1-2. Create conda env in server
 ```
 source $HOME/miniconda3/bin/activate
