@@ -1,5 +1,5 @@
 # :bangbang: All work should be done in ```/workdir/XX/```:bangbang:
-## 1. Load the env and Download the DB
+## 1. Load the env and Download the DB
 #### 1-1. Load the env
 ```
 source /programs/miniconda3/bin/activate run_dbcan4
@@ -25,7 +25,7 @@ cd db \
     && wget http://bcb.unl.edu/dbCAN2/download/Samples/EscheriaColiK12MG1655.gff
 ```
 
-## 2. Input preparation 
+## 2. Input preparation
 :heavy_exclamation_mark: Input fasta should already be cleaned - which means all the QC are done 
 :heavy_exclamation_mark: Here we use kneaddata cleaned fastq generated during the [biobakery](https://github.com/parkjooyoung99/Poole-lab/tree/b844ccc705f5eb6c7e74c349d4c632eea06a478c/Biobakery_workflow)
 
@@ -36,20 +36,24 @@ mkdir -p /workdir/XXX/run_dbcan/input
 while read line; do echo "$line" && ln -s "/workdir/XXX/output_ours_baseline/kneaddata/main/$line" "/workdir/XXX/run_dbcan/input/$line"; done < fastqlist.txt
 ```
 
+#### 2-2. Change the format from fastq to fasta
+```
+source /programs/miniconda3/bin/activate run_dbcan4
+export PATH=/programs/seqtk:$PATH
 
+# need to do the below for all fastq, recommend to make a while loop as above linking process
+seqtk seq -a input/501.fastq > input/501.fasta 
+```
+
+## 3. Run dbcan
 :heavy_exclamation_mark: Methods the dbCAN uses are describe [here](https://dbcan.readthedocs.io/en/latest/user_guide/run_from_raw_reads.html)
-#### 2-1. 
-:heavy_exclamation_mark: Uses all three methods
-:small_red_triangle_down:Name should be 'Sample.R1.fastq.gz' or 'Sample.R2.fastq.gz' format
-make new directory that has all input fastq.gz file
+
+#### 3-1. Use all methods 
 ```
-mkdir input_ours_all
-ln -s "originalfastqpath/originalfastqfilename.gz" "/workdir/XX/input_ours_all/newfastqfilename.gz"
-```
-#### 2-2. Run wgmx ####
-```
-export BIOBAKERY_WORKFLOWS_DATABASES=/workdir/jp2626/biobakery_workflow_databases
-biobakery_workflows wmgx --input input_ours_all --output output_ours_all --bypass-strain-profiling --local-jobs 8 --threads 8
+run_dbcan input/501.fasta prok  --hmm_cpu 32 --out_dir /workdir/XXX/run_dbcan/output --use_signalP=TRUE -sp /programs/signalp-4.1/signalp --dia_cpu 32  --dbcan_thread 32 
 ```
 
-
+#### 3-2. Use only 'HMMER vs dbCAN HMMdb' method 
+```
+run_dbcan input/501.fasta prok  --hmm_cpu 32 --out_dir /workdir/jp2626/run_dbcan/output --use_signalP=TRUE -sp /programs/signalp-4.1/signalp  --tools hmmer
+```
